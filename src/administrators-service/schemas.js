@@ -77,8 +77,23 @@ const administratorsSchema = {
     response: {
       200: {
         type: 'object',
-        description: 'Object containing requested administrators',
+        description: 'Object containing requested administrator',
         properties: {
+          _id: {
+            description: 'Identifier of the administrator in the database',
+            type: 'string',
+          },
+          fullname: {
+            description: 'Full name of the administrator',
+            type: 'string',
+          },
+          combinations: {
+            description: 'List of available agency combination for this administrator',
+            type: 'array',
+            items: {
+              type: 'string'
+            },
+          },
         },
       },
     },
