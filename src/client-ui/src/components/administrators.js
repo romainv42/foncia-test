@@ -1,11 +1,12 @@
 import m from "mithril"
+import pagination from "./paginate"
 
 export const administrators = {
   list: {
     oncreate: (vnode) => {
       const refresh = (page, pageSize) => {
         m.request({
-          url: "/api/administators",
+          url: "/api/administrators",
           method: "GET",
           headers: {
             authorization: `Bearer ${localStorage.getItem("auth-token")}`
@@ -30,9 +31,7 @@ export const administrators = {
         m("table.table", [
           m("thead", [
             m("tr", [
-              m("th", "Nom"),
-              m("th", "Email"),
-              m("th", "Nombre de lots")
+              m("th", "Nom")
             ])
           ]),
           m("tbody", vnode.state.administrators.map(admin => {
@@ -48,6 +47,23 @@ export const administrators = {
       m("p", "Loading")
   },
   details: {
-
+    oncreate: (vnode) => {
+      m.request({
+        url: `/api/administrators/detail/${vnode.attrs.id}`,
+        method: "GET",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("auth-token")}`
+        }
+      }).then(data => {
+        vnode.state.administrator = data;
+      }).catch(err => {
+        m.route.set("/login");
+      });
+    },
+    view: (vnode) => vnode.state.administrator ? m(".container", [
+      m("h3", vnode.state.administrator.fullname),
+      m("h6", "Combinaisons accessibles:"),
+      m("ul", vnode.state.administrator.combinations.map(c => m("li", c)))
+    ]) : null
   }
 }

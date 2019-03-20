@@ -44,6 +44,6 @@ module.exports = async (fastify) => {
         }, JWT_SECRET),
       });
     }
-    res.status(401).send();
+    return res.status(401).send();
   });
 };

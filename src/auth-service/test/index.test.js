@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
 
-const JWT_SECRET = "my-secret-key";
-const JWT_TTL = "3600";
+const JWT_SECRET = 'my-secret-key';
+const JWT_TTL = '3600';
 
 Object.assign(process.env, { JWT_SECRET, JWT_TTL });
-
 
 const { build } = require('../index');
 

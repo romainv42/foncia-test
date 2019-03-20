@@ -1,7 +1,3 @@
-const fastify = require('fastify')({ logger: true });
-const mongoDecorator = require('mongo-decorator');
-const authHooks = require('auth-hooks');
-
 const {
   PORT,
   NODE_ENV,
@@ -10,6 +6,11 @@ const {
   MONGO_PASSWORD,
   JWT_SECRET,
 } = process.env;
+
+
+const fastify = require('fastify')({ logger: NODE_ENV !== 'test' });
+const mongoDecorator = require('mongo-decorator');
+const authHooks = require('auth-hooks');
 
 fastify.register(authHooks, { secret: JWT_SECRET });
 

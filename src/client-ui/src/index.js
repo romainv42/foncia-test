@@ -7,7 +7,7 @@ const routes = [
   { label: "Login", path: "/login", component: login, menu: false },
   { label: "Clients", path: "/clients", component: customers, menu: true, secured: true },
   { label: "Gestionnaires", path: "/gestionnaires", component: administrators.list, menu: true, secured: true },
-  { label: "Details Gestionnaire", path: "/gestionnaires/:id", component: administrators, menu: false, secured: true },
+  { label: "Details Gestionnaire", path: "/gestionnaires/:id", component: administrators.details, menu: false, secured: true },
 ];
 
 m.render(document.getElementById("menu"), m(menu, { routes }));

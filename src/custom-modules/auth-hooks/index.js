@@ -3,11 +3,11 @@ const jwt = require('jsonwebtoken');
 
 async function authValidation(fastify, options, next) {
   // check authentification before anything else
-  fastify.addHook("preValidation", async (req, res, next) => {
+  fastify.addHook('preValidation', async (req, res, next) => {
     const authorization = req.headers['authorization'];
     if (!authorization || !authorization.startsWith('Bearer ')) {
-      res.code(401);
-      return next(new Error("Unauthorized"));
+        res.code(401);
+        return next(new Error('Unauthorized'));
     }
 
     const token = authorization.substring(7);

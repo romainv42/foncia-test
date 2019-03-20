@@ -7,14 +7,14 @@ const customersSchema = {
     headers: {
       type: 'object',
       properties: {
-        authorization: { type: 'string' }
+        authorization: { type: 'string' },
       },
     },
     query: {
       type: 'object',
       properties: {
         page: { type: 'integer' },
-        pageSize: { type: 'integer' }
+        pageSize: { type: 'integer' },
       },
     },
     response: {
@@ -55,7 +55,7 @@ const customersSchema = {
                 },
                 batchCount: {
                   description: 'Batch owned by the customer',
-                  type: 'int',
+                  type: 'integer',
                 },
               },
             },
