@@ -1,0 +1,16 @@
+{
+  "name": "auth-hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify-plugin": "^1.5.0",
+    "jsonwebtoken": "^8.5.1"
+  }
+}

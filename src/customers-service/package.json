@@ -1,0 +1,30 @@
+{
+  "name": "foncia-stark-test",
+  "version": "1.0.0",
+  "description": "Foncia Stark Test",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "test": "jest --silent",
+    "start": "node index.js"
+  },
+  "author": "Romain Viau [SFEIR]",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.5.0",
+    "nodemon": "^1.18.10",
+    "pino-pretty": "^2.5.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "fastify": "^2.1.0",
+    "fastify-plugin": "^1.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.19"
+  }
+}

@@ -1,0 +1,77 @@
+version: '3.4'
+services:
+  mongo-server:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./init-mongo:/docker-entrypoint-initdb.d/
+      - ./subject/myFonciaBdd:/backup
+    networks:
+      foncia-nw:
+        aliases:
+          - database
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo-server
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+    networks:
+      foncia-nw:
+
+  nginx:
+    image: nginx:alpine
+    volumes:
+      - ./init-nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./src/client-ui:/etc/nginx/html
+    ports:
+      - 80:80
+    networks:
+      foncia-nw:
+
+  foncia-auth:
+    build:
+      context: ./src/auth-service/
+    env_file: ./src/secrets.env
+    networks:
+      foncia-nw:
+
+  foncia-customers:
+    build:
+      context: ./src/customers-service/
+    env_file: ./src/secrets.env
+    volumes:
+      - ./src/custom-modules/auth-hooks:/usr/src/app/node_modules/auth-hooks/
+      - ./src/custom-modules/mongo-decorator:/usr/src/app/node_modules/mongo-decorator/
+      - ./src/custom-modules/paginate-hooks:/usr/src/app/node_modules/paginate-hooks/
+    environment:
+      MONGO_URL: mongo-server
+      MONGO_USER: root
+      MONGO_PASSWORD: example
+    networks:
+      foncia-nw:
+
+  foncia-admins:
+    build:
+      context: ./src/administrators-service/
+      target: dev-image
+    env_file: ./src/secrets.env
+    volumes:
+      - ./src/custom-modules/auth-hooks:/usr/src/app/node_modules/auth-hooks/
+      - ./src/custom-modules/mongo-decorator:/usr/src/app/node_modules/mongo-decorator/
+      - ./src/custom-modules/paginate-hooks:/usr/src/app/node_modules/paginate-hooks/
+    environment:
+      MONGO_URL: mongo-server
+      MONGO_USER: root
+      MONGO_PASSWORD: example
+    networks:
+      foncia-nw:
+
+networks:
+  foncia-nw:
