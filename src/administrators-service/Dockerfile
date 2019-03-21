@@ -2,6 +2,9 @@ FROM node:10.15-alpine AS dev-image
 ENV NODE_ENV=development
 WORKDIR /usr/src/app
 
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh
+
 COPY package.json .
 RUN npm i --verbose
 

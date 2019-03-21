@@ -52,7 +52,6 @@ services:
   foncia-admins:
     build:
       context: ./src/administrators-service/
-      target: dev-image
     env_file: ./src/secrets.env
     restart: always
     volumes:

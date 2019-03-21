@@ -18,14 +18,14 @@ const authHooksMock = fastifyPlugin(async fastify => fastify.addHook('preValidat
   return next();
 }));
 
-const adminMock = {
+const dalMock = {
   customers: {
     list: jest.fn(),
   },
 };
 
 const mongoMock = fastifyPlugin(async (fastify) => {
-  fastify.decorate('dal', adminMock);
+  fastify.decorate('dal', dalMock);
 });
 
 describe('CUSTOMERS Service', () => {
@@ -76,7 +76,7 @@ describe('CUSTOMERS Service', () => {
   });
 
   it('should return a list', async () => {
-    adminMock.administrators.list.mockResolvedValue({
+    dalMock.customers.list.mockResolvedValue({
       count: 3,
       page: 1,
       size: 10,
@@ -110,11 +110,11 @@ describe('CUSTOMERS Service', () => {
       },
     });
     expect(response.statusCode).toBe(200);
-    expect(adminMock.administrators.list).toHaveBeenCalledWith(1, 10);
+    expect(dalMock.customers.list).toHaveBeenCalledWith(1, 10);
   });
 
   it('should be called with pagination query params', async () => {
-    adminMock.administrators.list.mockResolvedValue({
+    dalMock.customers.list.mockResolvedValue({
       count: 3,
       page: 1,
       size: 10,
@@ -141,6 +141,6 @@ describe('CUSTOMERS Service', () => {
         authorization: 'GOOD-TOKEN',
       },
     });
-    expect(adminMock.administrators.list).toHaveBeenCalledWith(2, 42);
+    expect(dalMock.customers.list).toHaveBeenCalledWith(2, 42);
   });
 });

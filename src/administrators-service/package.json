@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
-    "test": "jest --silent",
+    "test": "NODE_ENV=test jest --silent",
     "start": "node index.js"
   },
   "author": "Romain Viau [SFEIR]",
@@ -21,10 +21,13 @@
     "pino-pretty": "^2.5.0"
   },
   "dependencies": {
+    "auth-hooks": "git://github.com/romainv42/auth-hooks.git",
     "body-parser": "^1.18.3",
     "fastify": "^2.1.0",
     "fastify-plugin": "^1.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.4.19"
+    "mongo-decorator": "git://github.com/romainv42/mongo-decorator.git",
+    "mongoose": "^5.4.19",
+    "paginate-hooks": "git://github.com/romainv42/paginate-hooks.git"
   }
 }

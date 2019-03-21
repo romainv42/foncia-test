@@ -28,8 +28,7 @@ This folder contains source codes of different services. Please read `README.md`
 This folder contains exercice requirements and description, and provided files for Database and Mongoose.
 
 ## Hack
-There is some custom node modules in `src/custom-modules` folder. Best practices would require to publish these modules in a private npm registry but to deliver this project without any external dependencies, the folder is embedded inside each service container by volume binding.
-(`npm link` command seems to not work inside Docker image)
+There is some custom node modules in `src/custom-modules` folder. These modules are inside this repository and add in other repositories too, to be able to download it with `npm`
 
 ## API
 If you test locally, API Base Url will be `http://localhost`. Each requests will be proxied by NGINX to correct service.
@@ -157,10 +156,15 @@ A small UI interface is provided: `http://localhost`
 
 ### auth-hooks
 This module is a Fastify hooks. It will check the existence of an access token and its validity for services will need it. Just register the module in Fastify and each route will be checked!
+https://github.com/romainv42/auth-hooks
+
 
 ### mongo-decorator
 This module is a Fastify decorator. It will connect to Mongo database with provided credentials and give a Data Access Layer to make request. When registered, DAL is accessible in each route with `fastify.dal`.
+https://github.com/romainv42/mongo-decorator
+
 
 ### paginate-hooks
 This module is a Fastify hooks. It will retrieve `page` and `pageSize` from query params or create them with default values and set them accessible in `req.page` and `req.pageSize` in each route.
+https://github.com/romainv42/paginate-hooks
 
