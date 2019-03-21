@@ -27,6 +27,7 @@ services:
 
   nginx:
     image: nginx:alpine
+    restart: always
     volumes:
       - ./init-nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./src/client-ui:/etc/nginx/html
@@ -39,6 +40,7 @@ services:
     build:
       context: ./src/auth-service/
     env_file: ./src/secrets.env
+    restart: always
     networks:
       foncia-nw:
 
@@ -46,6 +48,7 @@ services:
     build:
       context: ./src/customers-service/
     env_file: ./src/secrets.env
+    restart: always
     volumes:
       - ./src/custom-modules/auth-hooks:/usr/src/app/node_modules/auth-hooks/
       - ./src/custom-modules/mongo-decorator:/usr/src/app/node_modules/mongo-decorator/
@@ -62,6 +65,7 @@ services:
       context: ./src/administrators-service/
       target: dev-image
     env_file: ./src/secrets.env
+    restart: always
     volumes:
       - ./src/custom-modules/auth-hooks:/usr/src/app/node_modules/auth-hooks/
       - ./src/custom-modules/mongo-decorator:/usr/src/app/node_modules/mongo-decorator/
