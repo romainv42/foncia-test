@@ -39,7 +39,7 @@ module.exports = (mongoose) => {
     get: async (id) => new Promise((resolve, reject) => {
       model.findById(id, (err, data) => {
         if (err) return reject(err);
-        resolve(data._doc);
+        resolve(data ? data._doc : null);
       });
     })
   }

@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-unresolved
 const pagination = require('paginate-hooks');
 
 const customersSchema = {
