@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack src/index.js --output bin/app.js -d --watch",
+    "prebuild": "npm i",
     "build": "webpack src/index.js --output bin/app.js"
   },
   "keywords": [],
