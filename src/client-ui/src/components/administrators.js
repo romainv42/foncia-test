@@ -64,8 +64,8 @@ export const administrators = {
       vnode.state.pagination = { page: 1, pageSize: 10, method: () => m.redraw() };
     },
     view: (vnode) => vnode.state.administrator ? m(".container", [
-      m("h3", vnode.state.administrator.fullname),
-      m("h6", "Combinaisons accessibles:"),
+      m("h3.title", vnode.state.administrator.fullname),
+      m("h6.subtitle", "Combinaisons accessibles:"),
       m("ul", vnode.state.administrator.combinations
         .slice(
           (vnode.state.pagination.page - 1) * vnode.state.pagination.pageSize,
