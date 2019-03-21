@@ -56,14 +56,23 @@ export const administrators = {
         }
       }).then(data => {
         vnode.state.administrator = data;
+        vnode.state.pagination.count = Math.ceil(vnode.state.administrator.combinations.length / vnode.state.pagination.pageSize)
       }).catch(err => {
         m.route.set("/login");
       });
+
+      vnode.state.pagination = { page: 1, pageSize: 10, method: () => m.redraw() };
     },
     view: (vnode) => vnode.state.administrator ? m(".container", [
       m("h3", vnode.state.administrator.fullname),
       m("h6", "Combinaisons accessibles:"),
-      m("ul", vnode.state.administrator.combinations.map(c => m("li", c)))
+      m("ul", vnode.state.administrator.combinations
+        .slice(
+          (vnode.state.pagination.page - 1) * vnode.state.pagination.pageSize,
+          ((vnode.state.pagination.page - 1) * vnode.state.pagination.pageSize) + vnode.state.pagination.pageSize)
+        .map(c => m("li", c))),
+      m(pagination, { pagination: vnode.state.pagination })
+
     ]) : null
   }
 }
